@@ -1,31 +1,31 @@
 # frozen_string_literal: true
+
 require 'active_support/all'
 
+# You can pass in a time, the time will be checked if it was or was not leet in the timezone given!
 class LeetTime
-  def initialize(time)
-    @time = time
-    @time_with_zone = @time.in_time_zone
-  end
+  def initialize; end
 
   def self.greet
     '1337 71m3'
   end
 
-  def is_leet?
-    is_hour_min?(hour: 13, min: 37)
+  def leet_time?(time)
+    @leet_time_with_zone = time.in_time_zone
+    @leet_time_with_zone.hour == 13 && @leet_time_with_zone.min == 37
   end
 
-  def before_leet?
-    Time.now.before?(@time_with_zone.change(hour: 13, minute: 37))
+  def now_before_leet?
+    lt = Time.now.in_time_zone.change(hour: 13, min: 37)
+    ct = Time.now.in_time_zone
+
+    ct.before?(lt)
   end
 
-  def after_leet?
-    Time.now.after?(@time_with_zone.change(hour: 13, minute: 37))
-  end
+  def now_after_leet?
+    lt = Time.now.in_time_zone.change(hour: 13, min: 37)
+    ct = Time.now.in_time_zone
 
-  private
-
-  def is_hour_min?(hour: Integer, min: Integer)
-    hour == @time_with_zone.hour && min == @time_with_zone.min
+    ct.after?(lt)
   end
 end
