@@ -8,7 +8,7 @@ class LeetTime
   end
 
   def self.greet
-    puts '1337 71m3'
+    '1337 71m3'
   end
 
   def is_leet?
